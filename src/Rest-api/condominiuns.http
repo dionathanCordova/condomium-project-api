@@ -1,6 +1,0 @@
-###
-GET http://localhost:3000/condominiuns
-
-###
-POST http://localhost:3000/users
-
