@@ -6,7 +6,13 @@ export class Users1635691387760 implements MigrationInterface {
       new Table({
         name: 'c_users',
         columns: [
-          { name: 'id', type: 'integer', isPrimary: true },
+          {
+            name: 'id',
+            type: 'uuid',
+            isPrimary: true,
+            generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
+          },
           { name: 'apartment', type: 'varchar', isNullable: false },
           { name: 'name', type: 'varchar', isNullable: false },
           { name: 'email', type: 'varchar', isNullable: false },
