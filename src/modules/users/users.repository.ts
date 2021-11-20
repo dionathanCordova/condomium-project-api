@@ -9,7 +9,7 @@ export class UsersRepository extends BaseRepository<Users> {
     return this.find();
   }
 
-  async getOne(id: number) {
+  async getOne(id: string) {
     return this.findOne(id);
   }
 
