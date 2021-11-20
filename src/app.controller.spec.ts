@@ -15,8 +15,13 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return "API online!"', () => {
+      const res = {
+        statusCode: 200,
+        message: 'API online',
+      };
+
+      expect(appController.getHello()).toMatchObject(res);
     });
   });
 });
