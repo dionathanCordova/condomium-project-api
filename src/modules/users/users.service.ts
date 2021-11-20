@@ -15,15 +15,14 @@ export class UsersService {
     return this.usersRepository.getOne(id);
   }
 
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
     return this.usersRepository.createUser(createUserDto);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    // await this.UsuariosRepo.findOneOrFail(id);
-    // this.UsuariosRepo.update([id], body);
-    // return this.UsuariosRepo.findOneOrFail(id);
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    await this.usersRepository.findOneOrFail(id);
+    const userUpdate = this.usersRepository.update([id], updateUserDto);
+    // return this.usersRepository.save(userUpdate);
   }
 
   remove(id: number) {

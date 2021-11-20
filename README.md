@@ -30,6 +30,8 @@
 
 ```bash
 $ npm install
+
+$ npm run migration:run
 ```
 
 ## Running the app

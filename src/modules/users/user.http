@@ -5,22 +5,7 @@ GET http://localhost:3000/users
 GET http://localhost:3000/users/11
 
 ###
-PUT http://localhost:3000/users/401
-Content-Type: application/json
-
-{
-  "name": "Dionathan Cordovas",
-  "email": "dionathan.cordovassss@gmail.com",
-  "telefone": "47 9 9999-9991",
-  "apartamento": 301,
-  "password": "teste1",
-  "permission_nivel": 1,
-  "image": "null",
-  "condominio_id": 71
-}
-
-###
-POST http://localhost:3000/users HTTP/1.1
+PUT http://localhost:3000/users/09fa562c-3667-4230-a807-fe3baf39d778
 Content-Type: application/json
 
 {
@@ -31,8 +16,25 @@ Content-Type: application/json
   "password": "teste",
   "permission_id": 0,
   "avatar": "null",
-  "condominio_id": 7,
-  "isAdmin": false,
+  "condominium_id": 7,
+  "is_admin": false,
+  "can_show_data": false
+}
+
+###
+POST http://localhost:3000/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "apartment": 302,
+  "name":"Dionathan2",
+  "email": "dionathan.cordova2@gmail.com",
+  "telephone": "47 9 9999-9999",
+  "password": "teste",
+  "permission_id": 0,
+  "avatar": "null",
+  "condominium_id": 7,
+  "is_admin": false,
   "can_show_data": true
 }
 
