@@ -1,14 +1,24 @@
+import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { UsersRepository } from '../users.repository';
 import { UsersService } from '../users.service';
-import { v4 as uuid } from 'uuid';
+import { mockUser } from './mockUser';
 
 describe('UsersService', () => {
   let service: UsersService;
+  let userRepository: Repository<UsersRepository>;
 
   const mockUserRepository = {
-    createUser: jest.fn().mockImplementation((user) => Promise.resolve(user)),
+    findAll: jest.fn().mockResolvedValue([mockUser(), mockUser()]),
+    getOne: jest.fn().mockResolvedValue([mockUser()]),
+    findOne: jest.fn().mockResolvedValue([mockUser()]),
+    createUser: jest.fn().mockResolvedValue(mockUser()),
+    findOneOrFail: jest.fn().mockResolvedValue(mockUser()),
+    merge: jest.fn().mockResolvedValue(mockUser()),
+    save: jest.fn().mockResolvedValue(mockUser()),
+    delete: jest.fn().mockResolvedValue(mockUser()),
   };
 
   beforeEach(async () => {
@@ -23,30 +33,86 @@ describe('UsersService', () => {
     }).compile();
 
     service = module.get<UsersService>(UsersService);
+    userRepository = module.get<Repository<UsersRepository>>(
+      getRepositoryToken(UsersRepository),
+    );
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
-  it('should be able to create a new user and return that', async () => {
-    const user = {
-      name: 'dionathan',
-      telephone: '123',
-      apartment: '201',
-      condominium_id: 1,
-      email: 'dionathan@test.com',
-      password: uuid(),
-      id: uuid(),
-      permission_id: 0,
-      avatar: '',
-      can_show_data: true,
-      is_admin: false,
-    };
+  describe('When find users', () => {
+    it('should be able to find all users', async () => {
+      const user1 = mockUser();
+      const user2 = mockUser();
+      expect(await service.findAll()).toEqual([user1, user2]);
+      expect(mockUserRepository.findAll).toBeCalled();
+    });
 
-    expect(await service.create(user)).toEqual({
-      id: expect.any(String),
-      ...user,
+    it('should be able to find an user by id', async () => {
+      const user1 = mockUser();
+
+      expect(await service.findOne(user1.id)).toMatchObject([user1]);
+    });
+  });
+
+  describe('When create an user', () => {
+    it('should be able to create a new user and return that', async () => {
+      const user = mockUser();
+
+      expect(await service.create(user)).toEqual({
+        id: expect.any(String),
+        ...user,
+      });
+      expect(mockUserRepository.createUser).toBeCalled();
+    });
+
+    it('should throw an exception', async () => {
+      jest
+        .spyOn(mockUserRepository, 'createUser')
+        .mockRejectedValueOnce(new Error());
+
+      expect(service.create(mockUser())).rejects.toThrowError();
+    });
+  });
+
+  describe('When update user', () => {
+    it('should update an user', async () => {
+      const user = mockUser();
+
+      expect(await service.update(user.id, user)).toEqual(user);
+    });
+
+    it('should throw not found exception when update', async () => {
+      jest
+        .spyOn(userRepository, 'findOne')
+        .mockRejectedValueOnce(new NotFoundException());
+
+      try {
+        expect(service.update).rejects.toThrowError(TypeError);
+      } catch (error) {
+        expect(error.message).toBe('User not found');
+      }
+    });
+  });
+
+  describe('Whem remove user', () => {
+    it('should be able to remove user', async () => {
+      const user = mockUser();
+      expect(await service.remove(user.id)).toMatchObject(user);
+    });
+
+    it('should throw error when remove user fails', async () => {
+      jest
+        .spyOn(userRepository, 'findOneOrFail')
+        .mockRejectedValueOnce(new Error());
+
+      try {
+        await service.remove(mockUser().id);
+      } catch (error) {
+        expect(error).toBeInstanceOf(Error);
+      }
     });
   });
 });

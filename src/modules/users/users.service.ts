@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './users.repository';
@@ -11,7 +11,7 @@ export class UsersService {
     return this.usersRepository.findAll();
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return this.usersRepository.getOne(id);
   }
 
@@ -20,14 +20,14 @@ export class UsersService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    await this.usersRepository.findOneOrFail(id);
-    const userUpdate = this.usersRepository.update([id], updateUserDto);
-    // return this.usersRepository.save(userUpdate);
+    const findUser = await this.usersRepository.findOneOrFail(id);
+
+    this.usersRepository.merge(findUser, updateUserDto);
+    return this.usersRepository.save(findUser);
   }
 
-  remove(id: number) {
-    // await this.UsuariosRepo.findOneOrFail(id);
-    // await this.UsuariosRepo.delete(id);
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    await this.usersRepository.findOneOrFail(id);
+    return this.usersRepository.delete(id);
   }
 }
