@@ -12,9 +12,9 @@ describe('UsersService', () => {
 
   const mockUserRepository = {
     findAll: jest.fn().mockResolvedValue([mockUser(), mockUser()]),
-    getOne: jest.fn().mockResolvedValue([mockUser()]),
     findOne: jest.fn().mockResolvedValue([mockUser()]),
-    createUser: jest.fn().mockResolvedValue(mockUser()),
+    getOne: jest.fn().mockResolvedValue([mockUser()]),
+    createUser: jest.fn().mockResolvedValue([mockUser()]),
     findOneOrFail: jest.fn().mockResolvedValue(mockUser()),
     merge: jest.fn().mockResolvedValue(mockUser()),
     save: jest.fn().mockResolvedValue(mockUser()),
@@ -51,9 +51,9 @@ describe('UsersService', () => {
     });
 
     it('should be able to find an user by id', async () => {
-      const user1 = mockUser();
+      const user = mockUser();
 
-      expect(await service.findOne(user1.id)).toMatchObject([user1]);
+      expect(await service.findOne(user.id)).toMatchObject([user]);
     });
   });
 
@@ -61,10 +61,14 @@ describe('UsersService', () => {
     it('should be able to create a new user and return that', async () => {
       const user = mockUser();
 
-      expect(await service.create(user)).toEqual({
-        id: expect.any(String),
-        ...user,
-      });
+      jest.spyOn(mockUserRepository, 'findOne').mockResolvedValue(null);
+
+      expect(await service.create(user)).toEqual([
+        {
+          id: expect.any(String),
+          ...user,
+        },
+      ]);
       expect(mockUserRepository.createUser).toBeCalled();
     });
 
@@ -72,6 +76,14 @@ describe('UsersService', () => {
       jest
         .spyOn(mockUserRepository, 'createUser')
         .mockRejectedValueOnce(new Error());
+
+      expect(service.create(mockUser())).rejects.toThrowError();
+    });
+
+    it('shoul throw an not acceptable exeption when user email is already in use', () => {
+      jest
+        .spyOn(mockUserRepository, 'findOne')
+        .mockResolvedValueOnce(mockUser());
 
       expect(service.create(mockUser())).rejects.toThrowError();
     });
