@@ -28,7 +28,7 @@ Content-Type: application/json
 {
   "apartment": "302",
   "name":"Dionathan2",
-  "email": "dionathan.cordova2@gmail.com",
+  "email": "dionathan.cordova@gmail.com",
   "telephone": "47 9 9999-9999",
   "password": "teste",
   "permission_id": 0,

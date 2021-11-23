@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotAcceptableException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './users.repository';
@@ -16,6 +20,14 @@ export class UsersService {
   }
 
   async create(createUserDto: CreateUserDto) {
+    const checkUserEmail = await this.usersRepository.findOne({
+      where: { email: createUserDto.email },
+    });
+
+    if (checkUserEmail) {
+      throw new NotAcceptableException();
+    }
+
     return this.usersRepository.createUser(createUserDto);
   }
 
