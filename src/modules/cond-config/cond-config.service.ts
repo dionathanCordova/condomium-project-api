@@ -7,7 +7,7 @@ import { UpdateCondConfigDto } from './dto/update-cond-config.dto';
 export class CondConfigService {
   constructor(private readonly condConfigRepository: CondConfigRepository) {}
 
-  createConfig(createCondConfigDto: CreateCondConfigDto) {
+  async createConfig(createCondConfigDto: CreateCondConfigDto) {
     return this.condConfigRepository.createConfig(createCondConfigDto);
   }
 
