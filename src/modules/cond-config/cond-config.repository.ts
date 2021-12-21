@@ -8,14 +8,6 @@ import { CondConfig } from './entities/cond-config.entity';
 @EntityRepository(CondConfig)
 export class CondConfigRepository extends BaseRepository<CondConfig> {
   async createConfig(createCondConfigDto: CreateCondConfigDto) {
-    const find = await this.findOne({
-      condominium_id: createCondConfigDto.condominium_id,
-    });
-
-    if (!find) {
-      throw new NotFoundException('Condominium not found!');
-    }
-
     const findExistenceConfig = await this.find({
       where: {
         year: createCondConfigDto.year,
@@ -31,6 +23,8 @@ export class CondConfigRepository extends BaseRepository<CondConfig> {
 
   async updateConfig(id: string, updateCondConfigDto: UpdateCondConfigDto) {
     const find = await this.findOne(id);
+
+    console.log(find);
 
     if (!find) {
       throw new NotFoundException('Condominium not found!');
