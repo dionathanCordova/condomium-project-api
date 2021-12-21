@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { CondRepository } from './condominium.repository';
 import { CreateCondominiumDto } from './dto/create-condominium.dto';
 import { UpdateCondominiumDto } from './dto/update-condominium.dto';
 
 @Injectable()
 export class CondominiumService {
-  create(createCondominiumDto: CreateCondominiumDto) {
-    return 'This action adds a new condominium';
+  constructor(private readonly condRepository: CondRepository) {}
+
+  async create(createCondominiumDto: CreateCondominiumDto) {
+    return this.condRepository.createCond(createCondominiumDto);
   }
 
-  findAll() {
-    return `This action returns all condominium`;
+  async findAll() {
+    return this.condRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} condominium`;
+  async findOne(id: string) {
+    return this.condRepository.findOne(id);
   }
 
-  update(id: number, updateCondominiumDto: UpdateCondominiumDto) {
-    return `This action updates a #${id} condominium`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} condominium`;
+  async update(id: string, updateCondominiumDto: UpdateCondominiumDto) {
+    return this.condRepository.updateCond(id, updateCondominiumDto);
   }
 }

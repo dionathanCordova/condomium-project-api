@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
 import { CondominiumService } from './condominium.service';
 import { CreateCondominiumDto } from './dto/create-condominium.dto';
 import { UpdateCondominiumDto } from './dto/update-condominium.dto';
@@ -19,16 +19,14 @@ export class CondominiumController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.condominiumService.findOne(+id);
+    return this.condominiumService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCondominiumDto: UpdateCondominiumDto) {
-    return this.condominiumService.update(+id, updateCondominiumDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.condominiumService.remove(+id);
+  update(
+    @Param('id') id: string,
+    @Body() updateCondominiumDto: UpdateCondominiumDto,
+  ) {
+    return this.condominiumService.update(id, updateCondominiumDto);
   }
 }

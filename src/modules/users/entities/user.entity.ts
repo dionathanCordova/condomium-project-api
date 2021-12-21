@@ -8,7 +8,7 @@ import {
 
 import { Exclude } from 'class-transformer';
 
-@Entity('c_users')
+@Entity('users')
 export class Users {
   @PrimaryGeneratedColumn()
   id: string;
@@ -45,8 +45,8 @@ export class Users {
   can_show_data: boolean;
 
   @CreateDateColumn({ type: 'timestamp' })
-  created_at: string;
+  created_at: Date;
 
   @UpdateDateColumn({ type: 'timestamp' })
-  updated_at: string;
+  updated_at: Date;
 }

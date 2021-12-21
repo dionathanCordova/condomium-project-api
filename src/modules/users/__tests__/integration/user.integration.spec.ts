@@ -2,14 +2,15 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { UsersModule } from '../src/modules/users/users.module';
-import { UsersRepository } from '../src/modules/users/users.repository';
 import { v4 as uuid } from 'uuid';
+import { UsersModule } from '../../users.module';
+import { UsersRepository } from '../../users.repository';
 
 describe('UserController (e2e)', () => {
   let app: INestApplication;
 
   const mockUser = {
+    id: '09982e30-1e9b-4ba6-b065-88441deb0e7c',
     name: 'dionathan',
     telephone: '123',
     apartment: '201',
@@ -27,6 +28,10 @@ describe('UserController (e2e)', () => {
     createUser: jest.fn().mockResolvedValue(mockUser),
     findOne: jest.fn().mockResolvedValue(mockUser),
     update: jest.fn().mockResolvedValue(mockUser),
+    findOneOrFail: jest.fn().mockResolvedValue(mockUser),
+    merge: jest.fn().mockResolvedValue(mockUser),
+    save: jest.fn().mockResolvedValue(mockUser),
+    delete: jest.fn().mockResolvedValue(mockUser),
   };
 
   beforeEach(async () => {
@@ -111,13 +116,57 @@ describe('UserController (e2e)', () => {
   describe('When update user', () => {
     it('/users (PATH)', () => {
       return request(app.getHttpServer())
-        .patch('/users')
+        .patch(`/users/${mockUser.id}`)
         .send(mockUser)
         .expect('Content-Type', /json/)
-        .expect(201)
+        .expect(200)
         .then((response) => {
-          console.log(response);
-          // expect(response.body).toEqual(mockUser);
+          expect(response.body).toEqual(mockUser);
+        });
+    });
+
+    it('/users (PATH) -- validation error', () => {
+      jest
+        .spyOn(mockUsersRepository, 'findOneOrFail')
+        .mockRejectedValueOnce(null);
+
+      return request(app.getHttpServer())
+        .patch(`/users/${mockUser.id}`)
+        .send(mockUser)
+        .expect('Content-Type', /json/)
+        .expect(500)
+        .then((response) => {
+          expect(response.body).toEqual({
+            statusCode: 500,
+            message: 'Internal server error',
+          });
+        });
+    });
+  });
+
+  describe('When remove user', () => {
+    it('should remove user', () => {
+      return request(app.getHttpServer())
+        .delete(`/users/${mockUser.id}`)
+        .expect(200)
+        .then((response) => {
+          expect(response.body).toEqual(mockUser);
+        });
+    });
+
+    it('/users (PATH) -- validation error', () => {
+      jest
+        .spyOn(mockUsersRepository, 'findOneOrFail')
+        .mockRejectedValueOnce(null);
+
+      return request(app.getHttpServer())
+        .delete(`/users/${mockUser.id}`)
+        .expect(500)
+        .then((response) => {
+          expect(response.body).toEqual({
+            statusCode: 500,
+            message: 'Internal server error',
+          });
         });
     });
   });
