@@ -1,1 +1,21 @@
+###
 GET http://localhost:3000/condominium
+
+
+###
+POST http://localhost:3000/condominium HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Rebecca2",
+  "count_apartments": 6
+}
+
+###
+PATCH  http://localhost:3000/condominium/123 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Rebecca22",
+  "count_apartments": 6
+}

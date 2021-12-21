@@ -1,30 +1,32 @@
 import {
   Column,
   CreateDateColumn,
+  Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
+@Entity('config')
 export class CondConfig {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column({ type: 'double', comment: 'valor mínimo agua' })
+  @Column({ type: 'float', comment: 'valor mínimo agua' })
   basic_water_rate: number;
 
-  @Column({ type: 'double', comment: 'valor médio agua' })
+  @Column({ type: 'float', comment: 'valor médio agua' })
   average_water_rate: number;
 
-  @Column({ type: 'double', comment: 'valor alto agua' })
+  @Column({ type: 'float', comment: 'valor alto agua' })
   high_water_rate: number;
 
-  @Column({ type: 'double', comment: 'valor limpeza' })
+  @Column({ type: 'float', comment: 'valor limpeza' })
   cleaning_fee: number;
 
-  @Column({ type: 'double', comment: 'valor reserva' })
+  @Column({ type: 'float', comment: 'valor reserva' })
   reserve_value: number;
 
-  @Column({ type: 'double', comment: 'valor do m3 do gás' })
+  @Column({ type: 'float', comment: 'valor do m3 do gás' })
   m3_gas_value: number;
 
   @Column({ comment: 'síndico isento de pagamento' })

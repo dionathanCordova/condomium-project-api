@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AppConfigModule } from './config/api/config.module';
-import { IndexModules } from './modules/index.modules';
+import { IndexModules } from './modules/index.module';
 import { DatabaseProviderModule } from './providers/database/provider.module';
 
 @Module({

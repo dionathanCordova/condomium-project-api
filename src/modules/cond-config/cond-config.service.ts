@@ -7,8 +7,8 @@ import { UpdateCondConfigDto } from './dto/update-cond-config.dto';
 export class CondConfigService {
   constructor(private readonly condConfigRepository: CondConfigRepository) {}
 
-  create(createCondConfigDto: CreateCondConfigDto) {
-    return 'This action adds a new condConfig';
+  createConfig(createCondConfigDto: CreateCondConfigDto) {
+    return this.condConfigRepository.createConfig(createCondConfigDto);
   }
 
   findAll(id: string) {
@@ -22,11 +22,7 @@ export class CondConfigService {
     });
   }
 
-  update(id: number, updateCondConfigDto: UpdateCondConfigDto) {
-    return `This action updates a #${id} condConfig`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} condConfig`;
+  update(id: string, updateCondConfigDto: UpdateCondConfigDto) {
+    return this.condConfigRepository.updateConfig(id, updateCondConfigDto);
   }
 }

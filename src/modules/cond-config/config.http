@@ -1,0 +1,40 @@
+###
+GET http://localhost:3000/cond-config/edfd145f-a9e2-435a-ba7a-e42fc214f138
+
+
+###
+GET http://localhost:3000/cond-config/edfd145f-a9e2-435a-ba7a-e42fc214f138/last
+
+### 
+POST http://localhost:3000/cond-config  HTTP/1.1
+Content-Type: application/json
+
+{
+    "basic_water_rate": 9,
+    "average_water_rate": 10,
+    "high_water_rate": 11,
+    "cleaning_fee": 250,
+    "reserve_value": 300,
+    "m3_gas_value": 19,
+    "liquidator_exempt": false,
+    "payment_plan": "free",
+    "year": 2021,
+    "condominium_id": "21a19f85-cfeb-4ad4-8474-c1aac4b88642"
+}
+
+### 
+POST http://localhost:3000/cond-config  HTTP/1.1
+Content-Type: application/json
+
+{
+    "basic_water_rate": 9,
+    "average_water_rate": 10,
+    "high_water_rate": 11,
+    "cleaning_fee": 250,
+    "reserve_value": 300,
+    "m3_gas_value": 19,
+    "liquidator_exempt": false,
+    "payment_plan": "free",
+    "year": 2021,
+    "condominium_id": "21a19f85-cfeb-4ad4-8474-c1aac4b88642"
+}

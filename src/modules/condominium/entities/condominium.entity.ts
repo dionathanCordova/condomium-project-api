@@ -1,5 +1,11 @@
-import { Column, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
+@Entity('condominium')
 export class Condominium {
   @PrimaryGeneratedColumn()
   id: string;
@@ -8,7 +14,7 @@ export class Condominium {
   name: string;
 
   @Column()
-  config_id: string;
+  config_id?: string;
 
   @Column()
   count_apartments: number;

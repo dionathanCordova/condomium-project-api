@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { CondominiumService } from './condominium.service';
 import { CondominiumController } from './condominium.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Condominium } from './entities/condominium.entity';
+import { CondRepository } from './condominium.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Condominium])],
+  imports: [TypeOrmModule.forFeature([CondRepository])],
   controllers: [CondominiumController],
   providers: [CondominiumService],
 })
