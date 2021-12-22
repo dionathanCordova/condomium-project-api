@@ -9,7 +9,7 @@ describe('ApartmentsService', () => {
 
   const mockApartmentRepository = {
     findAll: jest.fn().mockResolvedValue(mockApartmentsStub()),
-    create: jest.fn().mockResolvedValue(mockApartment()),
+    createApartment: jest.fn().mockResolvedValue(mockApartment()),
     getOne: jest.fn(),
     findOne: jest.fn(),
     deleteApartment: jest.fn().mockResolvedValue(mockApartment()),

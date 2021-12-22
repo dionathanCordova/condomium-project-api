@@ -12,7 +12,7 @@ describe('UserController (e2e)', () => {
   const mockApartmentsRepository = {
     findAll: jest.fn().mockResolvedValue(mockApartmentsStub()),
     getOne: jest.fn(),
-    create: jest.fn().mockResolvedValue(mockApartmentsStub()[0]),
+    createApartment: jest.fn().mockResolvedValue(mockApartmentsStub()[0]),
     findOne: jest.fn(),
     deleteApartment: jest.fn().mockResolvedValue(mockApartmentsStub()[0]),
   };
