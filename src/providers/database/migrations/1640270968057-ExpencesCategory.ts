@@ -30,6 +30,6 @@ export class ExpencesCategory1640270968057 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.dropTable('expenses_category')
+    await queryRunner.dropTable('expenses_category');
   }
 }
