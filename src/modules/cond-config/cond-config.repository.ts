@@ -24,8 +24,6 @@ export class CondConfigRepository extends BaseRepository<CondConfig> {
   async updateConfig(id: string, updateCondConfigDto: UpdateCondConfigDto) {
     const find = await this.findOne(id);
 
-    console.log(find);
-
     if (!find) {
       throw new NotFoundException('Condominium not found!');
     }
