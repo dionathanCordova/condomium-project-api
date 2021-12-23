@@ -1,0 +1,23 @@
+###
+POST http://localhost:3000/expenses-category HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Expenses1"
+}
+
+###
+PATCH  http://localhost:3000/expenses-category/2ccfe948-8e85-439e-a798-d8e2fc01597e HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Expenses2"
+}
+
+
+###
+GET http://localhost:3000/expenses-category
+
+###
+DELETE http://localhost:3000/expenses-category/dde518b5-4d8e-4bbe-b9ca-6f331c0c6932
+
