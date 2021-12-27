@@ -4,6 +4,7 @@ import { CondominiumModule } from './condominium/condominium.module';
 import { UsersModule } from './users/users.module';
 import { ApartmentsModule } from './apartments/apartments.module';
 import { ExpensesCategoryModule } from './expenses-category/expenses-category.module';
+import { ExpensesModule } from './expenses/expenses.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ExpensesCategoryModule } from './expenses-category/expenses-category.mo
     CondominiumModule,
     ApartmentsModule,
     ExpensesCategoryModule,
+    ExpensesModule,
   ],
 })
 export class IndexModules {}

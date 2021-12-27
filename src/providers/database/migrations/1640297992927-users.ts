@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class Users1635691387760 implements MigrationInterface {
+export class users1640297992927 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'c_users',
+        name: 'users',
         columns: [
           {
             name: 'id',
@@ -20,7 +20,7 @@ export class Users1635691387760 implements MigrationInterface {
           { name: 'permission_id', type: 'integer', isNullable: false },
           { name: 'is_admin', type: 'boolean', isNullable: false },
           { name: 'can_show_data', type: 'boolean', default: true },
-          { name: 'condominium_id', type: 'integer', isNullable: false },
+          { name: 'condominium_id', type: 'uuid', isNullable: false },
           { name: 'avatar', type: 'varchar', isNullable: false },
           { name: 'telephone', type: 'varchar', isNullable: false },
           {
@@ -34,11 +34,21 @@ export class Users1635691387760 implements MigrationInterface {
             default: 'current_timestamp',
           },
         ],
+        foreignKeys: [
+          {
+            name: 'user_cond',
+            referencedTableName: 'condominium',
+            referencedColumnNames: ['id'],
+            columnNames: ['condominium_id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+          },
+        ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('c_users');
+    await queryRunner.dropTable('users');
   }
 }

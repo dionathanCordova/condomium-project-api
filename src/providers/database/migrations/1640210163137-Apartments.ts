@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export class Apartments1640210163137 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -26,6 +31,16 @@ export class Apartments1640210163137 implements MigrationInterface {
             default: 'current_timestamp',
           },
         ],
+      }),
+    );
+
+    await queryRunner.createForeignKey(
+      'apartments',
+      new TableForeignKey({
+        columnNames: ['condominium_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'condominium',
+        onDelete: 'CASCADE',
       }),
     );
   }

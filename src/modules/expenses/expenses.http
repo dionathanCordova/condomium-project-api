@@ -1,0 +1,28 @@
+###
+POST http://localhost:3000/expenses HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Expenses1",
+  "value": 10,
+  "month": 2,
+  "year": 2021,
+  "category_id": "6938db25-c0cb-4d56-b98f-524498cde8c1",
+  "condominium_id": "f4cd6db4-a30d-45c5-ae69-6f8118fa2ab1"
+}
+
+###
+PATCH  http://localhost:3000/expenses/07e4d46d-4947-485d-a469-9bbc2378d496 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Expenses22"
+}
+
+
+###
+GET http://localhost:3000/expenses/2/2021
+
+###
+DELETE http://localhost:3000/expenses/6b98d0a5-70e7-4eea-a6cd-6a94ca5930b0
+
