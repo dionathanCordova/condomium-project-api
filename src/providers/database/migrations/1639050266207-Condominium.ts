@@ -32,6 +32,6 @@ export class Condominium1639050266207 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('condominuim');
+    await queryRunner.dropTable('condominium');
   }
 }
