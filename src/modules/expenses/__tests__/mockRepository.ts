@@ -13,6 +13,6 @@ export const mockExpense = () => {
 export const mockExpensesRepositoty = {
   createExpense: jest.fn().mockResolvedValue(mockExpense()),
   findAll: jest.fn().mockResolvedValue(mockExpense()),
-  update: jest.fn().mockResolvedValue(mockExpense()),
-  delete: jest.fn().mockResolvedValue(mockExpense()),
+  updateExpanse: jest.fn().mockResolvedValue(mockExpense()),
+  removeExpanse: jest.fn().mockResolvedValue(mockExpense()),
 };
