@@ -10,7 +10,7 @@ import { CondConfigModule } from '../cond-config.module';
 import { CondConfigRepository } from '../cond-config.repository';
 import { mockCondConfig, mockConfigOutput } from './mockConfig';
 
-describe('UserController (e2e)', () => {
+describe('Cond config (integration)', () => {
   let app: INestApplication;
 
   const mockConfigRepository = {

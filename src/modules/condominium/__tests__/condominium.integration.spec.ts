@@ -10,7 +10,7 @@ import { CondominiumModule } from '../condominium.module';
 import { CondRepository } from '../condominium.repository';
 import { mockCond, mockCondStub } from './mockCond';
 
-describe('UserController (e2e)', () => {
+describe('Condominium (integration)', () => {
   let app: INestApplication;
 
   const mockCondominiumRepository = {

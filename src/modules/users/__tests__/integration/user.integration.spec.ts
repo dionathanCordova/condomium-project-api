@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 import { UsersModule } from '../../users.module';
 import { UsersRepository } from '../../users.repository';
 
-describe('UserController (e2e)', () => {
+describe('Users (integration)', () => {
   let app: INestApplication;
 
   const mockUser = {
