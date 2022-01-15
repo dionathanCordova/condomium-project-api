@@ -2,7 +2,7 @@ import { NotFoundException } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateWaterExpensesDto } from './dto/create-water-expense.dto';
 import { UpdateWaterExpensesDto } from './dto/update-water-expense.dto';
-import { WaterExpenses } from './entities/water-expenses';
+import { WaterExpenses } from './entities/water-expenses.entity';
 
 @EntityRepository(WaterExpenses)
 export class WaterExpensesRepository extends Repository<WaterExpenses> {
