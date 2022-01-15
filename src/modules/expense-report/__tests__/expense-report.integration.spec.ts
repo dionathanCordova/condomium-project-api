@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import {
   INestApplication,
   NotAcceptableException,
+  NotFoundException,
   ValidationPipe,
 } from '@nestjs/common';
 import * as request from 'supertest';
@@ -28,7 +29,7 @@ describe('Expense Report (integration)', () => {
   });
 
   describe('When find config', () => {
-    it('/expense-report (GET) by month, year and condominium_id', async () => {
+    it('/expense-report/:month/:year/:condominium_id (GET) by month, year and condominium_id', async () => {
       const response = await request(app.getHttpServer())
         .get('/expense-report/2/2021/09982e30-1e9b-4ba6-b065-88441deb0900')
         .expect('Content-Type', /json/)
@@ -73,76 +74,44 @@ describe('Expense Report (integration)', () => {
     });
   });
 
-  // todo continuar demais testes
+  describe('When update expense', () => {
+    it('/expense-report/:id (PATH) -- should return error when cond id is missing', async () => {
+      const response = await request(app.getHttpServer())
+        .patch('/expense-report')
+        .send(mockExpense())
+        .expect(404);
 
-  //   it('/cond-config (POST) -- validation error', async () => {
-  //     return request(app.getHttpServer())
-  //       .post('/cond-config')
-  //       .expect('Content-Type', /json/)
-  //       .expect(400)
-  //       .expect({
-  //         statusCode: 400,
-  //         message: [
-  //           'basic_water_rate must be a number conforming to the specified constraints',
-  //           'basic_water_rate should not be empty',
-  //           'average_water_rate must be a number conforming to the specified constraints',
-  //           'average_water_rate should not be empty',
-  //           'high_water_rate must be a number conforming to the specified constraints',
-  //           'high_water_rate should not be empty',
-  //           'cleaning_fee must be a number conforming to the specified constraints',
-  //           'reserve_value must be a number conforming to the specified constraints',
-  //           'm3_gas_value must be a number conforming to the specified constraints',
-  //           'liquidator_exempt must be a boolean value',
-  //           'payment_plan must be a string',
-  //           'year must be a number conforming to the specified constraints',
-  //           'year should not be empty',
-  //           'condominium_id must be a string',
-  //           'condominium_id should not be empty',
-  //         ],
-  //         error: 'Bad Request',
-  //       });
-  //   });
-  // });
+      expect(response.body).toEqual({
+        statusCode: 404,
+        message: 'Cannot PATCH /expense-report',
+        error: 'Not Found',
+      });
+    });
 
-  // describe('When update config', () => {
-  //   it('/cond-config (PATH) -- should return error when cond id is missing', async () => {
-  //     const response = await request(app.getHttpServer())
-  //       .patch('/cond-config')
-  //       .send(mockExpense())
-  //       .expect(404);
+    it('/expense-report/:id (PATH) -- should update config', async () => {
+      return request(app.getHttpServer())
+        .patch(`/expense-report/09982e30-1e9b-4ba6-b065-88441deb0900`)
+        .send(mockExpense())
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .expect(mockExpense());
+    });
 
-  //     expect(response.body).toEqual({
-  //       statusCode: 404,
-  //       message: 'Cannot PATCH /cond-config',
-  //       error: 'Not Found',
-  //     });
-  //   });
+    it('/expense-report (PATH) -- should throw error when expanse is not found', async () => {
+      jest
+        .spyOn(mockExpenseReport, 'updateExpenseReport')
+        .mockRejectedValueOnce(new NotFoundException('Expense not found!'));
 
-  //   it('/cond-config (PATH) -- should update config', async () => {
-  //     const response = await request(app.getHttpServer())
-  //       .patch(`/cond-config/09982e30-1e9b-4ba6-b065-88441deb0900`)
-  //       .send(mockExpense())
-  //       .expect('Content-Type', /json/)
-  //       .expect(200);
+      const response = await request(app.getHttpServer())
+        .patch(`/expense-report/09982e30-1e9b-4ba6-b065-88441deb0900`)
+        .send(mockExpense())
+        .expect(404);
 
-  //     expect(response.body).toEqual(mockConfigOutput());
-  //   });
-
-  //   it('/cond-config (PATH) -- should throw error when condominium is not found', async () => {
-  //     jest
-  //       .spyOn(mockConfigRepository, 'updateConfig')
-  //       .mockRejectedValueOnce(new NotFoundException('Condominium not found!'));
-
-  //     const response = await request(app.getHttpServer())
-  //       .patch(`/cond-config/09982e30-1e9b-4ba6-b065-88441deb0900`)
-  //       .send(mockExpense())
-  //       .expect(404);
-
-  //     expect(response.body).toEqual({
-  //       statusCode: 404,
-  //       message: 'Condominium not found!',
-  //       error: 'Not Found',
-  //     });
-  //   });
-  // });
+      expect(response.body).toEqual({
+        statusCode: 404,
+        message: 'Expense not found!',
+        error: 'Not Found',
+      });
+    });
+  });
 });
