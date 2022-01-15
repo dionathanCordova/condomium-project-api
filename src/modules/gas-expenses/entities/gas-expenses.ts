@@ -5,8 +5,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('water-expenses')
-export class WaterExpenses {
+@Entity('gas-expenses')
+export class GasExpenses {
   @PrimaryGeneratedColumn()
   id: string;
 
@@ -24,9 +24,6 @@ export class WaterExpenses {
 
   @Column()
   total_value: number;
-
-  @Column()
-  add_value: number;
 
   @Column()
   confirm_expense: boolean;
