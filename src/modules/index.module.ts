@@ -6,6 +6,9 @@ import { ApartmentsModule } from './apartments/apartments.module';
 import { ExpensesCategoryModule } from './expenses-category/expenses-category.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { ExpenseReportModule } from './expense-report/expense-report.module';
+import { GasExpensesModule } from './gas-expenses/gas-expenses.module';
+import { WaterExpensesModule } from './water-expenses/water-expenses.module';
+import { ApartmentExpensesModule } from './apartment-expenses/apartment-expense.module';
 
 @Module({
   imports: [
@@ -16,6 +19,9 @@ import { ExpenseReportModule } from './expense-report/expense-report.module';
     ExpensesCategoryModule,
     ExpensesModule,
     ExpenseReportModule,
+    GasExpensesModule,
+    WaterExpensesModule,
+    ApartmentExpensesModule,
   ],
 })
 export class IndexModules {}
