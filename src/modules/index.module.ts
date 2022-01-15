@@ -9,6 +9,7 @@ import { ExpenseReportModule } from './expense-report/expense-report.module';
 import { GasExpensesModule } from './gas-expenses/gas-expenses.module';
 import { WaterExpensesModule } from './water-expenses/water-expenses.module';
 import { ApartmentExpensesModule } from './apartment-expenses/apartment-expense.module';
+import { CondominiumAddressModule } from './condominium-address/condominium-address.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ApartmentExpensesModule } from './apartment-expenses/apartment-expense.
     GasExpensesModule,
     WaterExpensesModule,
     ApartmentExpensesModule,
+    CondominiumAddressModule,
   ],
 })
 export class IndexModules {}
