@@ -6,7 +6,7 @@ import { ExpensesCategoryModule } from '../expenses-category.module';
 import { ExpensesCategoryRepository } from '../expences-category.repository';
 import { mockExpense, mockExpensesCategoryRepository } from './mockExpences';
 
-describe('UserController (e2e)', () => {
+describe('Expense Category (integration)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -23,7 +23,6 @@ describe('UserController (e2e)', () => {
     await app.init();
   });
 
-  // .get('/expenses-category/21a19f85-cfeb-4ad4-8474-c1aac4b88643')
   describe('When find expenses category', () => {
     it('/expenses-category (GET) all', async () => {
       const response = await request(app.getHttpServer())

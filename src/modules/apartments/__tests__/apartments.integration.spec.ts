@@ -6,7 +6,7 @@ import { ApartmentsModule } from '../apartments.module';
 import { ApartmentsRepository } from '../apartments.repository';
 import { mockApartment, mockApartmentsStub } from './mockApartments';
 
-describe('UserController (e2e)', () => {
+describe('Apartments (integration)', () => {
   let app: INestApplication;
 
   const mockApartmentsRepository = {
