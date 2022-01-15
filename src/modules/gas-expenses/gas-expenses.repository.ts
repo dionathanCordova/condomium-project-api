@@ -2,7 +2,7 @@ import { NotFoundException } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateGasExpensesDto } from './dto/create-gas-expense.dto';
 import { UpdateGasExpensesDto } from './dto/update-gas-expense.dto';
-import { GasExpenses } from './entities/gas-expenses';
+import { GasExpenses } from './entities/gas-expenses.entity';
 
 @EntityRepository(GasExpenses)
 export class GasExpensesRepository extends Repository<GasExpenses> {
