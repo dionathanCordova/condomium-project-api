@@ -1,14 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
 import { EntityNotFoundExceptionFilter } from './config/filters/entity-not-found.exception-filter';
 import { QueryFailedExceptionFilter } from './config/filters/query-failed-exception-filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AppConfigService } from './config/api/config.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
 
   app.useGlobalFilters(
     new QueryFailedExceptionFilter(),
@@ -23,6 +22,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000);
+  await app.listen(app.get(AppConfigService).port);
 }
 bootstrap();

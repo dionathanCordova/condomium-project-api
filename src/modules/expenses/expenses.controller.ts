@@ -8,11 +8,13 @@ import {
   Delete,
   ValidationPipe,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
 import { ExpensesService } from './expenses.service';
 
 @Controller('expenses')
+@ApiTags('Expenses')
 export class ExpensesController {
   constructor(private readonly expensesService: ExpensesService) {}
 

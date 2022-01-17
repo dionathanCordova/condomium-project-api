@@ -1,9 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CondConfigService } from './cond-config.service';
 import { CreateCondConfigDto } from './dto/create-cond-config.dto';
 import { UpdateCondConfigDto } from './dto/update-cond-config.dto';
 
 @Controller('cond-config')
+@ApiTags('Cond configuration')
 export class CondConfigController {
   constructor(private readonly condConfigService: CondConfigService) {}
 

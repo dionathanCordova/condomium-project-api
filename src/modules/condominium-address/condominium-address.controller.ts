@@ -1,9 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { CondominiumAddressService } from './condominium-address.service';
 import { CreateCondominiumAddressDto } from './dto/create-condominium-address.dto';
 import { UpdateCondominiumAddressDto } from './dto/update-condominium-address.dto';
 
 @Controller('condominium/address')
+@ApiTags('condominium address')
 export class CondominiumAddressController {
   constructor(
     private readonly condominiumAddressService: CondominiumAddressService,

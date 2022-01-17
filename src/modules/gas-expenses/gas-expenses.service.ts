@@ -34,3 +34,6 @@ export class GasExpensesService {
     );
   }
 }
+
+
+// TODO Criar user e doc swagger do mesmo
