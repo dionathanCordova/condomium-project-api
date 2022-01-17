@@ -10,8 +10,10 @@ import {
 import { ExpensesCategoryService } from './expenses-category.service';
 import { CreateExpensesCategoryDto } from './dto/create-expenses-category.dto';
 import { UpdateExpensesCategoryDto } from './dto/update-expenses-category.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('expenses-category')
+@ApiTags('Expenses category')
 export class ExpensesCategoryController {
   constructor(
     private readonly expensesCategoryService: ExpensesCategoryService,

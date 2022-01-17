@@ -2,8 +2,10 @@ import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
 import { ExpenseReportService } from './expense-report.service';
 import { CreateExpenseReportDto } from './dto/create-expense-report.dto';
 import { UpdateExpenseReportDto } from './dto/update-expense-report.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('expense-report')
+@ApiTags('Expense report')
 export class ExpenseReportController {
   constructor(private readonly expenseReportService: ExpenseReportService) {}
 

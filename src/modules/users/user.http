@@ -10,14 +10,14 @@ Content-Type: application/json
 
 {
   "apartment": "302",
-  "name":"Dionathan",
+  "name":"Dionathan2",
   "email": "dionathan.cordova3@gmail.com",
   "telephone": "47 9 9999-9999",
   "password": "teste",
   "permission_id": 0,
   "avatar": "null",
-  "condominium_id": 7,
-  "is_admin": false,
+  "condominium_id": "f4cd6db4-a30d-45c5-ae69-6f8118fa2ab1",
+  "is_admin": true,
   "can_show_data": false
 }
 
@@ -27,15 +27,15 @@ Content-Type: application/json
 
 {
   "apartment": "302",
-  "name":"Dionathan2",
-  "email": "dionathan.cordova@gmail.com",
+  "name":"Dionathan",
+  "email": "dionathan.cordova3@gmail.com",
   "telephone": "47 9 9999-9999",
   "password": "teste",
   "permission_id": 0,
   "avatar": "null",
-  "condominium_id": 7,
-  "is_admin": false,
-  "can_show_data": true
+  "condominium_id": "f4cd6db4-a30d-45c5-ae69-6f8118fa2ab1",
+  "is_admin": true,
+  "can_show_data": false
 }
 
 

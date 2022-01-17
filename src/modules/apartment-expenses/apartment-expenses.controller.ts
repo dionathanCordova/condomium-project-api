@@ -1,9 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { ApartmentExpensesService } from './apartment-expenses.service';
 import { CreateApartmentExpensesDto } from './dto/create-apartment-expense.dto';
 import { UpdateApartmentExpensesDto } from './dto/update-apartment-expense-report.dto';
 
 @Controller('apartment-expenses')
+@ApiTags('Apartments expenses')
 export class ApartmentExpensesController {
   constructor(
     private readonly apartmentExpensesService: ApartmentExpensesService,
